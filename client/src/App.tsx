@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
+import { ObjectId } from "mongodb";
 import Draggable from "react-draggable";
 import "./App.css";
-import "./StickyNote.css";
-// import StickyNote from "./StickyNoteMovableComponent";
-import StickyNote from "./StickyNoteResizableComponent";
+import StickyNote from "./StickyNote";
 
 /**
  * TODO:
@@ -11,11 +10,57 @@ import StickyNote from "./StickyNoteResizableComponent";
  * We then want to use array and display all the relevant sticky notes onto the page.
  * (Relevant means making sure that the date on the page and date on the sticky note matches)
  */
+let dateTime = new Date();
+
+interface StickyNoteProp {
+  _id: string;
+  name: string;
+  description: string;
+  date_created: Date;
+  last_x_coord: number;
+  last_y_coord: number;
+}
 
 function App() {
+  const [stickyNotes, setStickyNotes] = useState<StickyNoteProp[]>([]);
+  // const today = new Date().toDateString();
+
+  // const handleStop = (data: any) => {
+  //   console.log("stopped");
+  // };
+
+  useEffect(() => {
+    fetch("/api/testGet", { method: "GET" })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setStickyNotes(data.listCollection || []);
+      })
+      .catch((error) => console.error("Error fetching sticky notes:", error));
+  }, []);
+
   return (
     <>
-      <StickyNote />
+      <div className="App">
+        {stickyNotes.map((note) => (
+          // console.log("App.tsx name: ", note.name),
+          // console.log("App.tsx last x coord: ", note.last_x_coord),
+          // console.log("App.tsx last y coord: ", note.last_y_coord),
+          <StickyNote
+            _id={note._id}
+            name={note.name}
+            description={note.description}
+            date_created={new Date(note.date_created)}
+            last_x_coord={note.last_x_coord}
+            last_y_coord={note.last_y_coord}
+            // onStop={handleStop}
+          />
+        ))}
+      </div>
     </>
   );
 }

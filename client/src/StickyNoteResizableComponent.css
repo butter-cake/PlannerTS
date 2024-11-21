@@ -49,3 +49,8 @@
   right: 4px;
   cursor: se-resize;
 }
+
+.stickyNoteWrapper {
+  margin: 0;
+  padding: 0;
+}
