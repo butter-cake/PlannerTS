@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 import Draggable from "react-draggable";
 import "./App.css";
 import StickyNote from "./StickyNote";
+import Clock from "./ClockLayer";
 
 /**
  * TODO:
@@ -45,21 +46,24 @@ function App() {
 
   return (
     <>
-      <div className="App">
-        {stickyNotes.map((note) => (
-          // console.log("App.tsx name: ", note.name),
-          // console.log("App.tsx last x coord: ", note.last_x_coord),
-          // console.log("App.tsx last y coord: ", note.last_y_coord),
-          <StickyNote
-            _id={note._id}
-            name={note.name}
-            description={note.description}
-            date_created={new Date(note.date_created)}
-            last_x_coord={note.last_x_coord}
-            last_y_coord={note.last_y_coord}
-            // onStop={handleStop}
-          />
-        ))}
+      <div className="appContainer">
+        <div className="clockContainer">
+          <div className="clockWrapper">
+            <Clock />
+          </div>
+        </div>
+        <div className="App">
+          {stickyNotes.map((note) => (
+            <StickyNote
+              _id={note._id}
+              name={note.name}
+              description={note.description}
+              date_created={new Date(note.date_created)}
+              last_x_coord={note.last_x_coord}
+              last_y_coord={note.last_y_coord}
+            />
+          ))}
+        </div>
       </div>
     </>
   );

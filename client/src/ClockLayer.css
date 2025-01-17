@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;1,400&display=swap");
+
+.date {
+  color: #faf9f6;
+  font-family: "Kanit", monospace;
+  font-size: 300%;
+  opacity: 0.9;
+  font-weight: 800;
+  user-select: none;
+}
+
+.clock {
+  color: #faf9f6;
+  font-family: "Kanit", monospace;
+  font-size: 300%;
+  opacity: 0.9;
+  font-weight: 800;
+  user-select: none;
+  margin-left: 320px;
+}

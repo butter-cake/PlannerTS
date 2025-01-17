@@ -1,7 +1,5 @@
 import express from "express";
 import { ObjectId } from "mongodb";
-// import * as mongoDB from "mongodb";
-// import mongoose, { connect } from "mongoose";
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const dotenv = require("dotenv");
@@ -45,20 +43,9 @@ app.get("/api/testGet", async (req, res) => {
 
 app.post("/api/updateCoords", async (req, res) => {
   try {
-    // console.log("Raw request body:", req.body);
-    // console.log(req.body._id);
-    // console.log(req.body.last_x_coord);
-
     const { _id, last_x_coord, last_y_coord } = req.body;
-
-    // console.log("Extracted fields:");
-    // console.log("_id:", ObjectId.createFromHexString(_id));
-    // console.log("last_x_coord:", last_x_coord);
-    // console.log("last_y_coord:", last_y_coord);
-
     const database = client.db("Planner_Database");
     const collection = database.collection("Planner_Collection");
-
     const stickyNote = await collection.findOneAndUpdate(
       { _id: ObjectId.createFromHexString(_id) },
       {

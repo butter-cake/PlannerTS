@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { ObjectId } from "mongodb";
 import Draggable from "react-draggable";
 import { ResizableBox } from "react-resizable";
 import "./StickyNote.css";
+import StickyNoteContent from "./StickyNoteContent";
+import StickyNoteContentTemp from "./StickyNoteContentTemp";
 
 /**
  * TODO:
@@ -19,9 +20,28 @@ import "./StickyNote.css";
 
 const StickyNoteDraggable: any = Draggable;
 
+interface StickyNoteProp {
+  _id: string;
+  name: string;
+  description: string;
+  date_created: Date;
+  last_x_coord: number;
+  last_y_coord: number;
+}
+
 function StickyNote(StickyNoteProps: any) {
+  // console.log(StickyNoteProps.description);
+
+  const [isVisible, setIsVisible] = useState({
+    visible: false,
+  });
+
+  // const [stickyNoteDescription, setStickyNoteDescription] = useState({
+  //   description: StickyNoteProps.description,
+  // });
+
   const [stickyNoteState, setStickyNoteState] = useState({
-    ...StickyNoteProps,
+    // ...StickyNoteProps,
     position: {
       x: StickyNoteProps.last_x_coord,
       y: StickyNoteProps.last_y_coord,
@@ -37,27 +57,7 @@ function StickyNote(StickyNoteProps: any) {
     setDragOffset({ x: offsetX, y: offsetY });
   };
 
-  // useEffect(() => {
-  //   setStickyNoteState({
-  //     ...StickyNoteProps,
-  //   });
-  // }, [StickyNoteProps]);
-
-  // useEffect(()=>{})
-
-  // const handleStart = (e: any, data: any) => {
-  //   //console.log("Drag started", data);
-  // };
-
-  // const handleDrag = (data: any) => {
-  //   //console.log("Dragging", data);
-  //   setStickyNoteState((prevState: any) => ({
-  //     ...prevState,
-  //     position: { x: data.x, y: data.y }, // Update position during drag
-  //   }));
-  // };
   const handleDrag = (data: any) => {
-    // Update the position dynamically during drag with the offset
     const adjustedX = data.x + dragOffset.x;
     const adjustedY = data.y + dragOffset.y;
 
@@ -67,29 +67,19 @@ function StickyNote(StickyNoteProps: any) {
     }));
   };
 
-  // const handleStop = (data: any) => {
-  //   console.log("Drag stopped", data);
-  // };
-
-  // useEffect(() => {
-  //   StickyNoteProps.last_x_coord = stickyNoteState.x;
-  // }, []);
-
   function handleStop(data: any) {
     const adjustedX = data.x + dragOffset.x;
     const adjustedY = data.y + dragOffset.y;
 
     setStickyNoteState((prevState: any) => ({
       ...prevState,
-      last_x_coord: adjustedX, // Save the adjusted position without the offset
+      last_x_coord: adjustedX,
       last_y_coord: adjustedY,
     }));
 
-    // console.log("Drag stopped", data);
-    console.log("last known coordinates: ", data.x);
-    console.log("last known coordinates: ", data.y);
-    //console.log("StickyNoteProps._id value: ", StickyNoteProps._id);
-    console.log("StickyNoteProps._id value: ", StickyNoteProps._id);
+    // console.log("last known coordinates: ", data.x);
+    // console.log("last known coordinates: ", data.y);
+    // console.log("StickyNoteProps._id value: ", StickyNoteProps._id);
 
     setStickyNoteState((prevState: any) => ({
       ...prevState,
@@ -118,23 +108,11 @@ function StickyNote(StickyNoteProps: any) {
       });
   }
 
-  // const handleStop = (data: any) => {
-  //   console.log("Drag stopped", data);
-
-  // console.log(stickyNoteState.name);
-  // console.log("Last_x_coord: ", stickyNoteState.last_x_coord);
-  // console.log("Last_y_coord: ", stickyNoteState.last_y_coord);
-
   return (
     <div className="stickyNote">
       <StickyNoteDraggable
         bounds="body"
-        // axis="x"
         handle=".handle"
-        // defaultPosition={{
-        //   x: stickyNoteState.last_x_coord,
-        //   y: stickyNoteState.last_y_coord,
-        // }}
         position={stickyNoteState.position}
         grid={[5, 5]}
         scale={1}
@@ -147,19 +125,58 @@ function StickyNote(StickyNoteProps: any) {
             className="box"
             width={350}
             height={400}
-            // draggableOpts={{ grid: [25, 25] }}
             handle={<span className="custom-handle custom-handle-se" />}
             handleSize={[25, 25]}
             // minConstraints={[150, 150]}
-            // maxConstraints={[500, 300]}
             minConstraints={[250, 300]}
             // maxConstraints={[600, 600]}
           >
-            <div className="stickyNoteContainer">
+            <div
+              className="stickyNoteContainer"
+              onMouseEnter={(e) => {
+                setIsVisible({ visible: true });
+              }}
+              onMouseLeave={(e) => {
+                setIsVisible({ visible: false });
+              }}
+            >
               <div className="handle">{StickyNoteProps.name}</div>
               <div className="stickyNoteBody">
-                <div>{StickyNoteProps.description}</div>
-                {/* <div>{StickyNoteProps.Date}</div> */}
+                {/* <div
+                  className={
+                    isVisible.visible
+                      ? "stickyNoteOptionBarVisible"
+                      : "stickyNoteOptionBarNotVisible"
+                  }
+                >
+                  <div className="editButtonWrapper">
+                    <button type="button" className="editButton"></button>
+                  </div>
+                  <div className="settingButtonWrapper">
+                    <button type="button" className="settingButton">
+                      s
+                    </button>
+                  </div>
+                  <div className="deleteButtonWrapper">
+                    <button type="button" className="deleteButton">
+                      d
+                    </button>
+                  </div>
+                </div> */}
+
+                {/* <div className="stickyNoteTextBoxWrapper">
+                  <textarea className="stickyNoteTextBox" />
+                </div> */}
+                {/**
+                 * If if isEditable == true, then have a textbox appear.
+                 * If isEditable == false, then have a description appear.
+                 */}
+                {/* <div>{StickyNoteProps.description}</div> */}
+                <div>
+                  <StickyNoteContent {...StickyNoteProps} />
+                  {/* <StickyNoteContent {...StickyNoteProps.description} /> */}
+                  {/* <StickyNoteContentTemp {...StickyNoteProps} /> */}
+                </div>
               </div>
             </div>
           </ResizableBox>

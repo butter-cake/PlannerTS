@@ -1,3 +1,8 @@
+.stickyNote {
+  position: absolute;
+  z-index: 10;
+}
+
 .box {
   /* display: flex;
   justify-content: center;
@@ -39,8 +44,9 @@
 
 .custom-handle-se {
   bottom: -32px;
-  right: 6px;
+  right: 4px;
   cursor: se-resize;
+  border-radius: 2px;
 }
 
 .stickyNoteContainer {
@@ -71,7 +77,83 @@
   text-align: center;
 
   background-color: rgb(24, 24, 24);
+  /* background-color: grey; */
   border-right: 2px solid #333333;
   border-bottom: 2px solid #333333;
   border-left: 2px solid #333333;
+
+  display: flex;
+  justify-content: center;
+}
+
+.stickyNoteOptionBarVisible {
+  display: flex;
+  position: absolute;
+
+  margin-top: 2%;
+  margin-left: 65%;
+  /* background-color: red; */
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+  z-index: 15;
+}
+
+.stickyNoteOptionBarNotVisible {
+  display: flex;
+  position: absolute;
+
+  margin-top: 2%;
+  margin-left: 65%;
+  /* display: none; */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+.settingButton {
+  margin-left: 10px;
+  cursor: grab;
+}
+
+.editButton {
+  cursor: grab;
+  background: url("./assets/editIcon.svg") no-repeat center center;
+  /* background-size: cover; */
+  /* height: 100%;
+  width: 100%; */
+  height: 30px;
+  width: 40px;
+  border: none;
+}
+
+.deleteButton {
+  margin-left: 10px;
+  cursor: grab;
+}
+
+.stickyNoteTextBoxWrapper {
+  width: 88%;
+  height: 90%;
+  margin-top: 10px;
+  margin-right: -2px;
+  /* background-color: rgb(121, 5, 5); */
+  /* opacity: 0.65;
+  border-width: 2px;
+  border-style: dashed;
+  border-color: #1877ea; */
+
+  padding: 5px;
+}
+
+.stickyNoteTextBox {
+  width: 98%;
+  height: 100%;
+
+  background: grey;
+
+  resize: none;
+  outline: none;
+  border: none;
 }
