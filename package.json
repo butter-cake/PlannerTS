@@ -19,6 +19,7 @@
     "@types/lodash.debounce": "^4.0.9",
     "@types/mongoose": "^5.11.97",
     "@types/react-resizable": "^3.0.8",
+    "@types/sanitize-html": "^2.13.0",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
@@ -36,6 +37,7 @@
     "lodash.debounce": "^4.0.8",
     "mongoose": "^8.8.1",
     "react-draggable": "^4.4.6",
-    "react-resizable": "^3.0.5"
+    "react-resizable": "^3.0.5",
+    "sanitize-html": "^2.14.0"
   }
 }

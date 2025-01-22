@@ -2,7 +2,8 @@ import debounce from "lodash.debounce";
 import { useState, useEffect } from "react";
 import { EditorContent, useEditor, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import "./StickyNoteContent.css";
+import "./StickyNoteContentTemp.css";
+import sanitizeHtml from "sanitize-html";
 
 interface StickyNoteContentProps {
   description: string;
@@ -28,13 +29,14 @@ function StickyNoteContentTemp({ description, _id }: StickyNoteContentProps) {
     async (newDescription: string, localID: string) => {
       // console.log(newDescription);
       // console.log(localID);
+      const sanitizedDescription = sanitizeHtml(newDescription);
 
       await fetch("/api/testPost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ _id: localID, description: newDescription }),
+        body: JSON.stringify({ _id: _id, description: sanitizedDescription }),
       })
         .then((res) => res.json())
         .then((response) => {

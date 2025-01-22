@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap");
+
+body {
+  /* background-color: pink; */
+}
+
+/* .handle:hover {
+  transition-duration: 0.45s;
+  background-color: #bd0707;
+  opacity: 0.75;
+} */
+
+.button-group {
+  /* background-color: red; */
+}
+
+.button-group button {
+  background-color: none;
+  border: none;
+  margin-top: 12px;
+  margin-left: 12px;
+  text-align: center;
+  font-family: "Kanit", monospace;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.button-group button:hover {
+  transition-duration: 0.45s;
+  background-color: rgb(80, 77, 98);
+}
+
+.ProseMirror {
+  /* background-color: #f5f5f5; Change background color */
+  /* border: 2px solid #0078d4; Add a border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Add padding */
+  font-size: 16px; /* Change font size */
+  line-height: 1.5; /* Adjust line height */
+  font-family: "Kanit", monospace;
+  /* font-family: "Koh Santepheahp", serif; */
+  font-weight: 450;
+  font-size: 15px;
+  color: #e7e7e7; /* Set text color */
+}
+
+.ProseMirror:focus {
+  outline: none; /* Remove default focus outline */
+  /* box-shadow: 0 0 5px #0078d4; Add a custom focus effect */
+}

@@ -100,10 +100,6 @@ function StickyNote(StickyNoteProps: any) {
       });
   }
 
-  function changing() {
-    // console.log("hello");
-  }
-
   return (
     <div className="stickyNote">
       <StickyNoteDraggable
@@ -140,10 +136,7 @@ function StickyNote(StickyNoteProps: any) {
               <div className="stickyNoteBody">
                 <div>
                   {/* <StickyNoteContent {...StickyNoteProps} /> */}
-                  <StickyNoteContentTemp
-                    {...StickyNoteProps}
-                    onChange={changing}
-                  />
+                  <StickyNoteContentTemp {...StickyNoteProps} />
                 </div>
               </div>
             </div>
