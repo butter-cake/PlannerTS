@@ -30,18 +30,11 @@ interface StickyNoteProp {
 }
 
 function StickyNote(StickyNoteProps: any) {
-  // console.log(StickyNoteProps.description);
-
   const [isVisible, setIsVisible] = useState({
     visible: false,
   });
 
-  // const [stickyNoteDescription, setStickyNoteDescription] = useState({
-  //   description: StickyNoteProps.description,
-  // });
-
   const [stickyNoteState, setStickyNoteState] = useState({
-    // ...StickyNoteProps,
     position: {
       x: StickyNoteProps.last_x_coord,
       y: StickyNoteProps.last_y_coord,
@@ -99,13 +92,16 @@ function StickyNote(StickyNoteProps: any) {
     })
       .then((res) => res.json())
       .then((response) => {
-        //implement
         if (response.success) {
-          console.log("Coords updated!");
+          // console.log("Coords updated!");
         } else {
-          console.error("Coords not updated.");
+          // console.error("Coords not updated.");
         }
       });
+  }
+
+  function changing() {
+    // console.log("hello");
   }
 
   return (
@@ -142,40 +138,12 @@ function StickyNote(StickyNoteProps: any) {
             >
               <div className="handle">{StickyNoteProps.name}</div>
               <div className="stickyNoteBody">
-                {/* <div
-                  className={
-                    isVisible.visible
-                      ? "stickyNoteOptionBarVisible"
-                      : "stickyNoteOptionBarNotVisible"
-                  }
-                >
-                  <div className="editButtonWrapper">
-                    <button type="button" className="editButton"></button>
-                  </div>
-                  <div className="settingButtonWrapper">
-                    <button type="button" className="settingButton">
-                      s
-                    </button>
-                  </div>
-                  <div className="deleteButtonWrapper">
-                    <button type="button" className="deleteButton">
-                      d
-                    </button>
-                  </div>
-                </div> */}
-
-                {/* <div className="stickyNoteTextBoxWrapper">
-                  <textarea className="stickyNoteTextBox" />
-                </div> */}
-                {/**
-                 * If if isEditable == true, then have a textbox appear.
-                 * If isEditable == false, then have a description appear.
-                 */}
-                {/* <div>{StickyNoteProps.description}</div> */}
                 <div>
-                  <StickyNoteContent {...StickyNoteProps} />
-                  {/* <StickyNoteContent {...StickyNoteProps.description} /> */}
-                  {/* <StickyNoteContentTemp {...StickyNoteProps} /> */}
+                  {/* <StickyNoteContent {...StickyNoteProps} /> */}
+                  <StickyNoteContentTemp
+                    {...StickyNoteProps}
+                    onChange={changing}
+                  />
                 </div>
               </div>
             </div>

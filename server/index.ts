@@ -41,6 +41,27 @@ app.get("/api/testGet", async (req, res) => {
   }
 });
 
+app.post("/api/testPost", async (req, res) => {
+  try {
+    const { _id, description } = req.body;
+    // console.log("From backend", _id);
+
+    const database = client.db("Planner_Database");
+    const collection = database.collection("Planner_Collection");
+
+    const result = await collection.findOneAndUpdate(
+      { _id: ObjectId.createFromHexString(_id) }, // Filter by the document's _id
+      { $set: { description } }, // Set the new description
+      { returnDocument: "after" } // Return the updated document
+    );
+
+    res.status(201).json({ message: "Description added successfully", result });
+  } catch (error) {
+    console.error("Error updating sticky note coordinates:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
+
 app.post("/api/updateCoords", async (req, res) => {
   try {
     const { _id, last_x_coord, last_y_coord } = req.body;
