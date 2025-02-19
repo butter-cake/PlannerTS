@@ -28,23 +28,48 @@ function ClockLayer() {
   const formattedTime = time.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true, // 12-hour format with AM/PM
+    hour12: true,
   });
 
   return (
-    <>
-      <div className="date">
-        {dateArray[0]} {dateArray[1]}, {dateArray[2]}
+    <div className="clockDivBody">
+      <div className="clockDiv">
+        <div className="date">
+          <div>{dateArray[0]}</div>
+          <div>
+            {dateArray[1]}, {dateArray[2]}
+          </div>
+        </div>
+        <div className="clock">
+          {/* {formattedTime.split(":").map((part, index) => (
+            <span key={index}>
+              {index > 0 && showColon ? ":" : ""}
+              {part}
+            </span>
+          ))} */}
+          <div>
+            {formattedTime[0]}
+            {formattedTime[1]}
+          </div>
+
+          <div>
+            {showColon ? (
+              <div className="colonLight">{formattedTime[2]}</div>
+            ) : (
+              <div className="colonDark">{formattedTime[2]}</div>
+            )}
+          </div>
+
+          <div>
+            {formattedTime[3]}
+            {formattedTime[4]}
+            {formattedTime[5]}
+            {formattedTime[6]}
+            {formattedTime[7]}
+          </div>
+        </div>
       </div>
-      <div className="clock">
-        {formattedTime.split(":").map((part, index) => (
-          <span key={index}>
-            {index > 0 && showColon ? ":" : " "}
-            {part}
-          </span>
-        ))}
-      </div>
-    </>
+    </div>
   );
 }
 

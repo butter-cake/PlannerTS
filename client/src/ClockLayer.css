@@ -1,20 +1,55 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;1,400&display=swap");
 
+.clockDivBody {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.clockDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
 .date {
   color: #faf9f6;
   font-family: "Kanit", monospace;
-  font-size: 300%;
-  opacity: 0.9;
+  font-size: 5vh;
+  opacity: 1;
   font-weight: 800;
   user-select: none;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .clock {
   color: #faf9f6;
   font-family: "Kanit", monospace;
-  font-size: 300%;
+  font-size: 5vh;
   opacity: 0.9;
   font-weight: 800;
   user-select: none;
-  margin-left: 320px;
+  margin-left: 70vw;
+  margin-right: 1.5vw;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.clockAligner {
+  display: flex;
+  flex-direction: column;
+}
+
+.colonLight {
+  color: rgb(255, 255, 255);
+}
+
+.colonDark {
+  color: rgb(255, 255, 255);
+  opacity: 0.5;
 }

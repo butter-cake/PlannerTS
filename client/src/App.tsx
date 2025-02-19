@@ -24,11 +24,6 @@ interface StickyNoteProp {
 
 function App() {
   const [stickyNotes, setStickyNotes] = useState<StickyNoteProp[]>([]);
-  // const today = new Date().toDateString();
-
-  // const handleStop = (data: any) => {
-  //   console.log("stopped");
-  // };
 
   useEffect(() => {
     fetch("/api/testGet", { method: "GET" })
@@ -44,26 +39,55 @@ function App() {
       .catch((error) => console.error("Error fetching sticky notes:", error));
   }, []);
 
+  // function addStickyNote() {
+  //   fetch("/api/addNewStickyNote", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       _id: StickyNoteProps._id,
+  //       last_x_coord: adjustedX,
+  //       last_y_coord: adjustedY,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((response) => {
+  //       if (response.success) {
+  //         // console.log("Coords updated!");
+  //       } else {
+  //         // console.error("Coords not updated.");
+  //       }
+  //     });
+  // }
+
+  function addStickyNote() {
+    return;
+  }
+
   return (
     <>
       <div className="appContainer">
         <div className="clockContainer">
-          <div className="clockWrapper">
-            <Clock />
-          </div>
+          <Clock />
         </div>
         <div className="App">
-          {stickyNotes.map((note) => (
-            <StickyNote
-              _id={note._id}
-              name={note.name}
-              description={note.description}
-              date_created={new Date(note.date_created)}
-              last_x_coord={note.last_x_coord}
-              last_y_coord={note.last_y_coord}
-            />
-          ))}
+          <div className="noteArea">
+            {stickyNotes.map((note) => (
+              <StickyNote
+                _id={note._id}
+                name={note.name}
+                description={note.description}
+                date_created={new Date(note.date_created)}
+                last_x_coord={note.last_x_coord}
+                last_y_coord={note.last_y_coord}
+              />
+            ))}
+          </div>
         </div>
+      </div>
+      <div className="bottomBar">
+        <button className="addNoteButton" onClick={addStickyNote}>
+          +
+        </button>
       </div>
     </>
   );

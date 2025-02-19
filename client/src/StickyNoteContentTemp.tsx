@@ -1,8 +1,11 @@
 import debounce from "lodash.debounce";
 import { useState, useEffect } from "react";
 import { EditorContent, useEditor, Editor } from "@tiptap/react";
+import TextAlign from "@tiptap/extension-text-align";
 import StarterKit from "@tiptap/starter-kit";
+import Highlight from "@tiptap/extension-highlight";
 import "./StickyNoteContentTemp.css";
+
 import sanitizeHtml from "sanitize-html";
 
 interface StickyNoteContentProps {
@@ -12,7 +15,13 @@ interface StickyNoteContentProps {
 
 function StickyNoteContentTemp({ description, _id }: StickyNoteContentProps) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Highlight,
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
+    ],
     content: description,
     editorProps: {
       attributes: {
@@ -63,8 +72,8 @@ function StickyNoteContentTemp({ description, _id }: StickyNoteContentProps) {
   }
 
   return (
-    <div>
-      <div className="stickyNoteContent">
+    <div className="stickyNoteContentBody">
+      <div className="stickyNoteButtons">
         <div className="button-group">
           <button
             onClick={() => editor.chain().focus().toggleBold().run()}
@@ -90,9 +99,25 @@ function StickyNoteContentTemp({ description, _id }: StickyNoteContentProps) {
           >
             Bullet list
           </button>
+          <button
+            onClick={() => editor.chain().focus().setTextAlign("left").run()}
+            className={
+              editor.isActive({ textAlign: "left" }) ? "is-active" : ""
+            }
+          >
+            Left
+          </button>
+          <button
+            onClick={() => editor.chain().focus().toggleHighlight().run()}
+            className={editor.isActive("highlight") ? "is-active" : ""}
+          >
+            Highlight
+          </button>
         </div>
       </div>
-      <EditorContent editor={editor} />
+      <div className="stickyNoteText">
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 }

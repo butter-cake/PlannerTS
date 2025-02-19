@@ -20,20 +20,7 @@ import StickyNoteContentTemp from "./StickyNoteContentTemp";
 
 const StickyNoteDraggable: any = Draggable;
 
-interface StickyNoteProp {
-  _id: string;
-  name: string;
-  description: string;
-  date_created: Date;
-  last_x_coord: number;
-  last_y_coord: number;
-}
-
 function StickyNote(StickyNoteProps: any) {
-  const [isVisible, setIsVisible] = useState({
-    visible: false,
-  });
-
   const [stickyNoteState, setStickyNoteState] = useState({
     position: {
       x: StickyNoteProps.last_x_coord,
@@ -106,7 +93,7 @@ function StickyNote(StickyNoteProps: any) {
         bounds="body"
         handle=".handle"
         position={stickyNoteState.position}
-        grid={[5, 5]}
+        grid={[2, 2]}
         scale={1}
         onStart={handleStart}
         onDrag={handleDrag}
@@ -123,15 +110,7 @@ function StickyNote(StickyNoteProps: any) {
             minConstraints={[250, 300]}
             // maxConstraints={[600, 600]}
           >
-            <div
-              className="stickyNoteContainer"
-              onMouseEnter={(e) => {
-                setIsVisible({ visible: true });
-              }}
-              onMouseLeave={(e) => {
-                setIsVisible({ visible: false });
-              }}
-            >
+            <div className="stickyNoteContainer">
               <div className="handle">{StickyNoteProps.name}</div>
               <div className="stickyNoteBody">
                 <div>
