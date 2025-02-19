@@ -78,7 +78,7 @@
   justify-content: center;
 
   overflow: scroll;
-  scrollbar-color: orange;
+  scrollbar-color: rgb(101, 118, 176) rgb(59, 72, 77);
 }
 
 .stickyNoteOptionBarVisible {

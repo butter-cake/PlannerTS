@@ -23,6 +23,7 @@ body {
   /* min-width: 320px;
   min-height: 100vh; */
   /* background: url("./assets/background1.png") no-repeat center center; */
+  background: url("./assets/background2.png") no-repeat center center;
   background-size: cover;
   height: 100%;
   width: 100%;

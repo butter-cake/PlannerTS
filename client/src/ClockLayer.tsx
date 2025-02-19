@@ -35,9 +35,11 @@ function ClockLayer() {
     <div className="clockDivBody">
       <div className="clockDiv">
         <div className="date">
-          <div>{dateArray[0]}</div>
-          <div>
-            {dateArray[1]}, {dateArray[2]}
+          <div className="dateOne">{dateArray[0]}</div>
+          <div className="dateTwo">
+            <div>{dateArray[1]}</div>
+            <div className="dateComma">,</div>
+            <div>{dateArray[2]}</div>
           </div>
         </div>
         <div className="clock">
